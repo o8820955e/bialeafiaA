@@ -102,7 +102,8 @@ export const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           className={`h-full bg-gradient-to-br ${slides[currentSlide].gradient} text-white relative overflow-hidden`}
         >
-          <div className="absolute inset-0 opacity-10">
+          {/* Decorative overlay should not block clicks */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />
           </div>
 
@@ -135,7 +136,7 @@ export const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
             </motion.p>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 p-6 pb-[max(env(safe-area-inset-bottom),1rem)] bg-gradient-to-t from-black/20 to-transparent">
+          <div className="fixed bottom-0 left-0 right-0 z-50 p-6 pb-[max(env(safe-area-inset-bottom),1rem)] bg-gradient-to-t from-black/20 to-transparent">
             <div className="flex justify-center space-x-2 space-x-reverse mb-6">
               {slides.map((_, index) => (
                 <button
@@ -179,4 +180,3 @@ export const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
     </div>
   );
 };
-
