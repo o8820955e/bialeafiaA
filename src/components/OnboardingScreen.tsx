@@ -2,12 +2,46 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight, Search, ShoppingCart, MapPin } from 'lucide-react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface OnboardingScreenProps {
   onComplete: () => void;
 }
 
 const slides = [
+  {
+    id: 0,
+    icon: Search,
+    title: 'تم تطوير التطبيق من قبل عمر شديفات',
+    description: 'طالب يدرس الأمن السيبراني — نسخة بتصميم حديث وتجربة سلسة.',
+    gradient: 'from-green-500 to-teal-600',
+    illustration: (
+      <div className="relative w-80 h-80 mx-auto flex items-center justify-center">
+        {/* Glow خلفي متدرج يدور */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-green-400/40 via-teal-400/20 to-green-500/40 blur-3xl"
+        />
+
+        {/* إطار خارجي نابض */}
+        <motion.div
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute w-64 h-64 rounded-full border-4 border-white/30 shadow-[0_0_50px_rgba(255,255,255,0.3)]"
+        />
+
+        {/* صورتك مكبرة */}
+        <div className="relative w-52 h-52 rounded-full overflow-hidden ring-4 ring-white/80 shadow-2xl bg-white/5 backdrop-blur-md">
+          <ImageWithFallback
+            src="https://i.postimg.cc/XYZm9JxX/2064511567.png"
+            alt="Omar Shdeifat"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    ),
+  },
   {
     id: 1,
     icon: Search,
@@ -102,7 +136,7 @@ export const OnboardingScreen = ({ onComplete }: OnboardingScreenProps) => {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           className={`h-full bg-gradient-to-br ${slides[currentSlide].gradient} text-white relative overflow-hidden`}
         >
-          {/* Decorative overlay should not block clicks */}
+          {/* Decorative overlay */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />
           </div>
